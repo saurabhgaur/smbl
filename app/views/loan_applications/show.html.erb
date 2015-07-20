@@ -1,14 +1,26 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = LoanApplication -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => LoanApplication %></h1>
+</div>
 
-<p>
-  <strong>Loan application:</strong>
-  <%= @loan_application.loan_application_id %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:loan_application_id) %></dt>
+      <dd><pre class="prettyprint"><%= @loan_application.loan_application_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:loan_amount) %></dt>
+      <dd><pre class="prettyprint"><%= @loan_application.loan_amount %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Loan amount:</strong>
-  <%= @loan_application.loan_amount %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              loan_applications_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_loan_application_path(@loan_application), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              loan_application_path(@loan_application),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<%= link_to 'Edit', edit_loan_application_path(@loan_application) %> |
-<%= link_to 'Back', loan_applications_path %>

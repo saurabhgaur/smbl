@@ -1,27 +1,38 @@
-<h1>Listing loan_applications</h1>
-
-<table>
+<%- model_class = LoanApplication -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => LoanApplication %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Loan application</th>
-      <th>Loan amount</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:loan_application_id) %></th>
+      <th><%= model_class.human_attribute_name(:loan_amount) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @loan_applications.each do |loan_application| %>
       <tr>
+        <td><%= loan_application.id %></td>
         <td><%= loan_application.loan_application_id %></td>
         <td><%= loan_application.loan_amount %></td>
-        <td><%= link_to 'Show', loan_application %></td>
-        <td><%= link_to 'Edit', edit_loan_application_path(loan_application) %></td>
-        <td><%= link_to 'Destroy', loan_application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l loan_application.created_at, format: :long %></td>
+        <td>
+          <%= link_to loan_application_path(loan_application), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to loan_application_path(loan_application), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Loan application', new_loan_application_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_loan_application_path,
+            :class => 'btn btn-primary' %>
