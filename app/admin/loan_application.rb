@@ -1,4 +1,5 @@
 ActiveAdmin.register LoanApplication do
+  permit_params :loan_application_id, :loan_amount
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
